@@ -5,10 +5,31 @@ import { padInt } from "../../utils/padInt"
 import "./style.css"
 
 interface IPokemon {
-    name: string
+    id: number,
+    name: string,
+    main_type: string,
+    base_experience: number,
     sprites: {
         front_default: string
-    }
+    },
+    types: {
+        type: {
+            name: string
+        }
+    }[],
+    height: number,
+    weight: number,
+    abilities: {
+        ability: {
+            name: string
+        }
+    }[],
+    stats: {
+        base_stat: number,
+        stat: {
+            name: string
+        }
+    }[]
 }
 
 const Pokemon: FC<Record<string, never>> = (() => {
@@ -19,16 +40,59 @@ const Pokemon: FC<Record<string, never>> = (() => {
         fetch(`${POKEAPI_BASE}/pokemon/${id}`)
             .then((response) => response.json())
             .then((data) => {
+                data.id = padInt(Number.parseInt(id!))
+                data.main_type = data.types[0]?.type.name
                 setPokemon(data)
+                console.log(data)
             })
     }, [id])
 
     return(
         <div className="container">
-            <div className="background"></div>
-            <h1>Pokemon id: {id}</h1>
-            <h2>{pokemon.name}</h2>
-            <img width={400} src={`${POKEAPI_IMG}/${padInt(Number.parseInt(id!))}.png`} alt={pokemon.name} />
+            <div className="background">
+                <h1 className="id">#{pokemon.id}</h1>
+            </div>
+            <div className="species">
+                <div className="species-img">
+                    <img width={60} src={`/types/${pokemon.main_type}.svg`}></img>
+                </div>
+                <div className="species-info">
+                    <h1 className="type">{pokemon.main_type}</h1>
+                    <h1 className="name">{pokemon.name}</h1>
+                </div>
+            </div>
+            <img className="pokemon-img" width={340} src={`${POKEAPI_IMG}/${pokemon.id}.png`} alt={pokemon.name} />
+
+            <div className="info">
+                <div className="info-item">
+                    <h1 className="info-title">Height</h1>
+                    <h1 className="info-value number">{pokemon.height}</h1>
+                </div>
+                <div className="info-item">
+                    <h1 className="info-title">Weight</h1>
+                    <h1 className="info-value number">{pokemon.weight}</h1>
+                </div>
+                <div className="info-item">
+                    <h1 className="info-title">Base Experience</h1>
+                    <h1 className="info-value number">{pokemon.base_experience}</h1>
+                </div>
+                {/* {pokemon.abilities && (
+                    <div className="info-item">
+                        <h1 className="info-title">Abilities</h1>
+                        <h1 className="info-value">
+                            {pokemon.abilities.map((ability, index) => {
+                                return (
+                                    <div className="ability" key={index}>
+                                        {ability.ability.name}
+                                        {index < pokemon.abilities.length - 1}
+                                    </div>
+                                )
+                            })}
+                        </h1>
+                </div>
+                )} */}
+            </div>
+            <div className="stats"></div>
         </div>
     )
 })

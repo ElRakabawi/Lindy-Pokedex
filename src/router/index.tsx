@@ -10,7 +10,7 @@ const Layout: any = ((View: any) => {
   return (
     <>
     <Navbar />
-    <div className='max-w-7xl mx-auto'>
+    <div>
       { View }
     </div>
     </>

@@ -27,7 +27,7 @@ const Navbar: FC<Record<string, never>> = (() => {
   }
 
   return(
-      <div>
+      <div className="navbar">
           <h1>Lindy Pokedex</h1>
           <input type="text" value={pokemonName} onChange={(e) => setPokemonName(e.target.value)} />
           <h1>Results</h1>

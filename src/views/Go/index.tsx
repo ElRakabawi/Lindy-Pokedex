@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import { POKEAPI_BASE } from '../../constants'
+import { useNavigate } from 'react-router-dom'
 
 function Go() {
+  const navigate = useNavigate()
   const [pokemonName, setPokemonName] = useState('')
 
   const goPokemon = (event: any) => {
@@ -9,7 +11,12 @@ function Go() {
     fetch(`${POKEAPI_BASE}/pokemon/${pokemonName}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+        data.order ? 
+          navigate(`/pokemon/${data.order}`) :
+          console.log('not found')
+      })
+      .catch((error) => {
+        console.error('Error:', error)
       })
   }
 
