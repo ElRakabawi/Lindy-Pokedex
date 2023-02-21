@@ -5,17 +5,22 @@ import { useNavigate } from 'react-router-dom'
 function Go() {
   const navigate = useNavigate()
   const [pokemonName, setPokemonName] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const goPokemon = async (event: any) => {
     event.preventDefault()
+    setLoading(true)
     const pokemon = await fetch(`${POKEAPI_BASE}/pokemon/${pokemonName}`)
     pokemon.status === 200 ?
       pokemon.json().then((data) => {
         data.order ?
-          navigate(`/pokemon/${data.order}`) :
+          (
+            setLoading(false),
+            navigate(`/pokemon/${data.order}`)
+          ) :
           console.log('error.')
       }) :
-      navigate('/pokemon404') 
+      (setLoading(false), navigate('/pokemon404'))
   }
 
   const handleChange = (event: any) => {
@@ -32,16 +37,13 @@ function Go() {
                 <div className="species-img">
                     <img width={60} src=""></img>
                 </div>
-                {/* <div className="species-info">
-                    <h1 className="type">{pokemon.main_type}</h1>
-                    <h1 className="name">{pokemon.name}</h1>
-                </div> */}
             </div>
             <img className="pokemon-img" width={340} src="/go.png"/>
             <form className="find-form" onSubmit={goPokemon}>
               <input className="find-input" type="text" placeholder='Find a Pokemon!' value={pokemonName} onChange={handleChange} />
               <input className="go-btn" type="submit" value="Go" />
             </form>
+            {loading && <h3 style={{ fontSize: 14, marginTop: 20, color: "white" }}>Searching...</h3>}
         </div>
     )
     </div>
