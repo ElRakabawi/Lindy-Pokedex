@@ -66,15 +66,18 @@ const Pokemon: FC<Record<string, never>> = (() => {
             <div className="info">
                 <div className="info-item">
                     <h1 className="info-title">Height</h1>
-                    <h1 className="info-value number">{pokemon.height}</h1>
+                    <h1 className="info-value number">{'0.' + pokemon.height}</h1>
+                    <span className="info-value unit">Meter</span>
                 </div>
                 <div className="info-item">
                     <h1 className="info-title">Weight</h1>
-                    <h1 className="info-value number">{pokemon.weight}</h1>
+                    <h1 className="info-value number">{pokemon.weight?.toString().split('').join('.')}</h1>
+                    <span className="info-value unit">Kg</span>
                 </div>
                 <div className="info-item">
                     <h1 className="info-title">Base Experience</h1>
                     <h1 className="info-value number">{pokemon.base_experience}</h1>
+                    <span className="info-value unit">Exp.</span>
                 </div>
                 {/* {pokemon.abilities && (
                     <div className="info-item">
@@ -92,7 +95,21 @@ const Pokemon: FC<Record<string, never>> = (() => {
                 </div>
                 )} */}
             </div>
-            <div className="stats"></div>
+            <div className="stats">
+                {pokemon.stats && (
+                    <div className="stats-container">
+                        {pokemon.stats.filter((stat) => !stat.stat.name.toString().includes('-')).map((stat, index) => {
+                            return (
+                                <div className="stat" key={index}>
+                                    <img width={25} src={`/stats/${stat.stat.name}.svg`} alt={stat.stat.name}/>
+                                    <h1 className="stat-title">{stat.stat.name}</h1>
+                                    <h1 className="stat-value number">{stat.base_stat}</h1>
+                                </div>
+                            )
+                        })}
+                    </div>
+                )}
+            </div>
         </div>
     )
 })

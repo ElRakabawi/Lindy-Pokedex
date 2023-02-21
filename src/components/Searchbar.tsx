@@ -28,14 +28,20 @@ const Navbar: FC<Record<string, never>> = (() => {
 
   return(
       <div className="navbar">
-          <h1>Lindy Pokedex</h1>
-          <input type="text" value={pokemonName} onChange={(e) => setPokemonName(e.target.value)} />
-          <h1>Results</h1>
-          <ul>
-            {pokemonMatches.map((pokemon: any, i: any) => 
-              <li onClick={() => openPokemon(i)} key={i}>{pokemon.name} : {i}</li>
-            )}
-          </ul>
+          {/* <h1>Lindy Pokedex</h1> */}
+          <input className="search-bar" placeholder="Chasing a Pokemon? Find it here." type="text" value={pokemonName} onChange={(e) => setPokemonName(e.target.value)} />
+          {/* <h1>Results</h1> */}
+          <div className="wrapper">
+            <div className="search-results">
+              {pokemonMatches.length > 0 ? 
+              <div className="pokemon-suggs">
+                {pokemonMatches.slice(0, 13).map((pokemon: any, i: any) => 
+                  <div className="pokemon-item" onClick={() => openPokemon(i)} key={i}>{pokemon.name}</div>
+                )}
+              </div>
+              : (<></>)}
+            </div>
+          </div>
       </div>
   )
 })

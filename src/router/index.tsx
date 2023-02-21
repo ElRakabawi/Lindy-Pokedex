@@ -4,7 +4,7 @@ import { createBrowserRouter } from "react-router-dom"
 import Go from '../views/Go'
 import Pokemon from '../views/Pokemon'
 
-import Navbar from "../components/Navbar"
+import Navbar from "../components/Searchbar"
 
 const Layout: any = ((View: any) => {
   return (

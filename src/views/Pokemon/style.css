@@ -5,7 +5,6 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  /* padding: 0 1.5em; */
 }
 
 .background {
@@ -18,13 +17,11 @@
   z-index: -1;
   background-blend-mode: soft-light, normal;
   overflow: hidden;
-  /* border-radius: 500px 500px 0px 0px; */
 }
 
 .background::after {
   content: '';
   background: rgba(255,255,255,.1);
-  /* filter: blur(10px); */
   height: 100vh;
   width: 100vh;
   position: absolute;
@@ -65,7 +62,7 @@
 
 .species-img{
   margin-right: 10px;
-  margin-top: 10px;
+  margin-top: 25px;
 }
 
 .species-info {
@@ -96,7 +93,8 @@
 .info {
   display: flex;
   flex-direction: row;
-  background: rgba(255,255,255,.1);
+  background: rgba(255,255,255,.2);
+  border: 1px solid white;
   border-radius: 10px;
   padding: 0.4em;
   margin: 0.5em 0;
@@ -113,7 +111,7 @@
 }
 
 .info-item:not(:last-child) {
-  border-right: 1px solid rgba(255,255,255,.1);
+  border-right: 1px solid rgba(255,255,255,.2);
 }
 
 .info-title {
@@ -151,4 +149,52 @@
 .stats {
   display: flex;
   flex-direction: column;
+  margin-top: 3vh;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(241, 240, 240, 0.2);
+  border: 1px solid white;
+  width: 90px;
+  border-radius: 10px;
+  padding: 1em 0.6em;
+  margin: 0.5em 0.4em;
+  transition: 0.5s ease-in-out;
+}
+
+.stat:hover {
+  cursor: pointer;
+  transform: translate(0, -12px);
+}
+
+.stat-title {
+  font-size: 0.7em;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  margin: 0;
+  padding-bottom: 5px;
+  text-transform: capitalize;
+}
+
+.stat-value {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 800;
+  margin: 0;
+  opacity: 0.8;
+  color: white;
+}
+
+.stat img {
+  width: 30px;
+  margin-bottom: 10px;
 }
