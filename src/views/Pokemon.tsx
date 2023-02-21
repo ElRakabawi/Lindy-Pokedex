@@ -1,8 +1,7 @@
 import { FC, useEffect, useState } from "react"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
-import { POKEAPI_BASE, POKEAPI_IMG } from "../../constants"
-import { padInt } from "../../utils/padInt"
-import "./style.css"
+import { POKEAPI_BASE, POKEAPI_IMG } from "../constants"
+import { padInt } from "../utils/padInt"
 
 interface IPokemon {
     id: number,
@@ -66,12 +65,12 @@ const Pokemon: FC<Record<string, never>> = (() => {
             <div className="info">
                 <div className="info-item">
                     <h1 className="info-title">Height</h1>
-                    <h1 className="info-value number">{'0.' + pokemon.height}</h1>
+                    <h1 className="info-value number">{pokemon.height/10}</h1>
                     <span className="info-value unit">Meter</span>
                 </div>
                 <div className="info-item">
                     <h1 className="info-title">Weight</h1>
-                    <h1 className="info-value number">{pokemon.weight?.toString().split('').join('.')}</h1>
+                    <h1 className="info-value number">{pokemon.weight/100}</h1>
                     <span className="info-value unit">Kg</span>
                 </div>
                 <div className="info-item">

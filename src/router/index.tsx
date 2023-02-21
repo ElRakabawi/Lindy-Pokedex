@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom"
 // import FourOFour from '../views/404'
 import Go from '../views/Go'
 import Pokemon from '../views/Pokemon'
+import PokemonNotFound from '../views/Pokemon404'
 
 import Navbar from "../components/Searchbar"
 
@@ -29,6 +30,10 @@ const routesList = [
   {
     path: "/pokemon/:id",
     element: Layout(<Pokemon />)
+  },
+  {
+    path: "/pokemon404",
+    element: Layout(<PokemonNotFound />)
   }
 ]
 

@@ -21,22 +21,20 @@ const Navbar: FC<Record<string, never>> = (() => {
     setPokemonMatches(pokemonList.filter((pokemon: any) => pokemon.name.includes(pokemonName)))
   }, [pokemonName])
 
-  const openPokemon = (i: any) => {
-    navigate(`/pokemon/${i+1}`)
+  const openPokemon = (pokemon: any) => {
+    navigate(`/pokemon/${pokemon.url.split('/')[6]}`)
     setPokemonName('')
   }
 
   return(
       <div className="navbar">
-          {/* <h1>Lindy Pokedex</h1> */}
           <input className="search-bar" placeholder="Chasing a Pokemon? Find it here." type="text" value={pokemonName} onChange={(e) => setPokemonName(e.target.value)} />
-          {/* <h1>Results</h1> */}
           <div className="wrapper">
             <div className="search-results">
               {pokemonMatches.length > 0 ? 
               <div className="pokemon-suggs">
-                {pokemonMatches.slice(0, 13).map((pokemon: any, i: any) => 
-                  <div className="pokemon-item" onClick={() => openPokemon(i)} key={i}>{pokemon.name}</div>
+                {pokemonMatches.slice(0, 13).map((pokemon: any, i: number) => 
+                  <div className="pokemon-item" onClick={() => openPokemon(pokemon)} key={i}>{pokemon.name}</div>
                 )}
               </div>
               : (<></>)}
