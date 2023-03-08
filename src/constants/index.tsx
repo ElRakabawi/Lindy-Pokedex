@@ -5,30 +5,7 @@ interface IObjectKeys {
     [key: string]: string
 }
 
-interface IColors extends IObjectKeys {
-    fire: string,
-    grass: string,
-    steel: string,
-    water: string,
-    psychic: string,
-    ground: string,
-    ice: string,
-    flying: string,
-    ghost: string,
-    normal: string,
-    poison: string,
-    rock: string,
-    fighting: string,
-    dark: string,
-    bug: string,
-    dragon: string,
-    electric: string,
-    fairy: string,
-    unknow: string,
-    shadow: string,
-}
-
-export const COLORS: IColors = {
+export const COLORS: IObjectKeys = {
     fire: '#ff7402',
     grass: '#33a165',
     steel: '#00858a',
